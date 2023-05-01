@@ -294,6 +294,8 @@ function Cloud({cloudUrl, apiKey}) {
             }
         }
 
+        // DASH
+        
         async function getDashInfo() {
             const dash = await axios.get(cloudUrl + `/api/dash/`, {
                 headers: { "API-Key" : apiKey},
