@@ -14,11 +14,12 @@ function Cloud({cloudUrl, apiKey}) {
             }
         })
         if (user.status == 200) {
-            return user.data
+            return {code: 200, data: user.data}
         } else if (user.status == 404) {
-            return logger.logError("Error 404: User not found")
+            logger.logError("Error 404: User not found")
+            return {code: 404, data: "User not found"}
         } else {
-            throw new Error("Error 401: Invalid API Key")
+            return {code: 401, data: "Invalid API key"}
         }
     }
     
@@ -31,9 +32,9 @@ function Cloud({cloudUrl, apiKey}) {
         })
     
         if (users.status == 200) {
-            return users.data
+            return {code: 200, data: users.data}
         } else if (users.status == 401) {
-            throw new Error("Error 401: Invalid API Key")
+            return {code: 401, data: "Invalid API key"}
         }
     }
     
@@ -45,11 +46,12 @@ function Cloud({cloudUrl, apiKey}) {
             }
         })
         if (createUser.status == 401) {
-            throw new Error("Error 401: Invalid API Key")
+           return {code: 401, data: "Invalid API key"}
         } else if (createUser.status == 409) {
-            return logger.logError("Error 409: User already exist")
+            logger.logError("Error 409: User already exist")
+            return {code: 409, data: "User already exist"}
         } else {
-            return createUser.data
+            return {code: 200, data: createUser.data}
         }
     } 
     
@@ -61,11 +63,12 @@ function Cloud({cloudUrl, apiKey}) {
             }
         })
         if (deluser.status == 200) {
-            return deluser.data 
+            return {code: 200, data: deluser.data}
         } else if (deluser.status == 404) {
-            return logger.logError("Error 404: User not found")
+            logger.logError("Error 404: User not found")
+            return {code: 404, data: "User not found"}
         } else if (deluser.status == 401) {
-            throw new Error("Error 401: Invalid API Key")
+           return {code: 401, data: "Invalid API key"}
         }
     }
     
@@ -77,11 +80,12 @@ function Cloud({cloudUrl, apiKey}) {
             }
         })
         if (edituser.status == 201) {
-            return edituser.data
+            return {code: 200, data: edituser.data}
         } else if (edituser.status == 404) {
-            return logger.logError("Error 404: User not found")
+            logger.logError("Error 404: User not found")
+            return {code: 404, data: "User not found"}
         } else if (edituser.status == 401) {
-            throw new Error("Error 401: Invalid API Key")
+           return {code: 401, data: "Invalid API key"}
         }
         }
     
@@ -93,11 +97,12 @@ function Cloud({cloudUrl, apiKey}) {
             }
         })
         if (verifyuser.status == 200) {
-            return verifyuser.data
+            return {code: 200, data: verifyuser.data}
         } else if (verifyuser.status == 404) {
-            return logger.logError("Error 404: User not found")
+            logger.logError("Error 404: User not found")
+            return {code: 404, data: "User not found"}
         } else if (verifyuser.status == 401) {
-            throw new Error("Error 401: Invalid API Key")
+           return {code: 401, data: "Invalid API key"}
         }
     }
     
@@ -110,11 +115,12 @@ function Cloud({cloudUrl, apiKey}) {
         })
     
     if (userrole.status == 201) {
-        return userrole.data
+        return {code: 201, data: userrole.data}
     } else if (userrole.status == 404) {
-        return logger.logError(userrole.data)
+        logger.logError(userrole.data)
+        return {code: 404, data: userrole.data}
     } else if (userrole.status == 401) {
-        throw new Error("Error 401: Invalid API Key")
+       return {code: 401, data: "Invalid API key"}
     }
     }
         // FILES
@@ -127,11 +133,12 @@ function Cloud({cloudUrl, apiKey}) {
                 }
             })
             if (files.status == 200) {
-                return files.data
+                return {code: 200, data: files.data}
             }  else if (files.status == 404) {
-                return logger.logError("Error 404: User not found")
+                logger.logError("Error 404: User not found")
+                return {code: 404, data: "User not found"}
             } else if (files.status == 401) {
-                throw new Error("Error 401: Invalid API Key")
+               return {code: 401, data: "Invalid API key"}
             }
         }
 
@@ -143,11 +150,12 @@ function Cloud({cloudUrl, apiKey}) {
                 }
             })
             if (delfile.status == 200) {
-                return delfile.data
+                return {code: 200, data: delfile.data}
             } else if (delfile.status == 404) {
-                return logger.logError(delfile.data)
+                logger.logError(delfile.data)
+                return {code: 200, data: delfile.data}
             } else if (delfile.status == 401) {
-                throw new Error("Error 401: Invalid API Key")
+               return {code: 401, data: "Invalid API key"}
             }
         }
         
@@ -159,11 +167,12 @@ function Cloud({cloudUrl, apiKey}) {
                 }
             })
             if (renfile.status == 201) {
-                return renfile.data
+                return {code: 201, data: renfile.data}
             } else if (renfile.status == 404) {
-                return logger.logError(renfile.data)
+                logger.logError(renfile.data)
+                return {code: 404, data: renfile.data}
             } else if (renfile.status == 401) {
-                throw new Error("Error 401: Invalid API Key")
+               return {code: 401, data: "Invalid API key"}
             }
         }
         
@@ -175,13 +184,15 @@ function Cloud({cloudUrl, apiKey}) {
                 }
             })
             if (sharefile.status == 201) {
-                return sharefile.data
+                return {code: 201, data: sharefile.data}
             } else if (sharefile.status == 404) {
-                return logger.logError(sharefile.data)
+                logger.logError(sharefile.data)
+                return {code: 404, data: sharefile.data}
             } else if (sharefile.status == 401) {
-                throw new Error("Error 401: Invalid API Key")
+               return {code: 401, data: "Invalid API key"}
             } else if (sharefile.status == 409) {
-                return logger.logError("Error 409: File is already shared")
+                logger.logError("Error 409: File is already shared")
+                return { code: 409, data: "File is already shared"}
             }
         }
 
@@ -193,11 +204,12 @@ function Cloud({cloudUrl, apiKey}) {
                 }
             })
             if (sharefile.status == 201) {
-                return sharefile.data
+                return {code: 201, data: sharefile.data}
             } else if (sharefile.status == 404) {
-                return logger.logError(sharefile.data)
+                logger.logError(sharefile.data)
+                return { code: 404, data: sharefile.data}
             } else if (sharefile.status == 401) {
-                throw new Error("Error 401: Invalid API Key")
+               return {code: 401, data: "Invalid API key"}
             } 
         }
 
@@ -211,11 +223,12 @@ function Cloud({cloudUrl, apiKey}) {
                 }
             })
             if (therole.status == 200) {
-                return therole.data
+                return {code: 200, data: therole.data}
             } else if (therole.status == 404) {
-                return logger.logError("Error 404: Role not found")
+                logger.logError("Error 404: Role not found")
+                return {code: 404, data: "Role not found"}
             } else if (therole.status == 401) {
-                throw new Error("Error 401: Invalid API Key")
+               return {code: 401, data: "Invalid API key"}
             }
         }
 
@@ -227,9 +240,9 @@ function Cloud({cloudUrl, apiKey}) {
                 }
             })
             if (therole.status == 200) {
-                return therole.data 
+                return {code: 200, data: therole.data}
             } else if (therole.status == 401) {
-                throw new Error("Error 401: Invalid API Key")
+               return {code: 401, data: "Invalid API key"}
             }
         }
 
@@ -246,11 +259,12 @@ function Cloud({cloudUrl, apiKey}) {
                 }
             })
             if (addrole.status == 201) {
-                return addrole.data
+                return {code: 201, data: addrole.data}
             } else if (addrole.status == 409) {
-                return logger.logError("Error 409: Role already exist")
+                logger.logError("Error 409: Role already exist")
+                return {code: 409, data: "Role already exist"}
             } else if (addrole.status == 401) {
-                throw new Error("Error 401: Invalid API Key")
+               return {code: 401, data: "Invalid API key"}
             }
         }
 
@@ -262,11 +276,12 @@ function Cloud({cloudUrl, apiKey}) {
                 }
             })
             if (delrole.status == 200) {
-                return delrole.data
+                return {code: 200, data: delrole.data}
             } else if (delrole.status == 404) {
-                return logger.logError("Error 404: Role not found")
+                logger.logError("Error 404: Role not found")
+                return {code: 404, data: "Role not found"}
             } else if (delrole.status == 401) {
-                throw new Error("Error 401: Invalid API Key")
+               return {code: 401, data: "Invalid API key"}
             }
         }
 
@@ -284,13 +299,15 @@ function Cloud({cloudUrl, apiKey}) {
                 }
             })
             if (editrole.status == 201) {
-                return editrole.data
+                return {code: 201, data: editrole.data}
             } else if (editrole.status == 409) {
-                return logger.logError("Error 409: You can't edit this role")
+                logger.logError("Error 409: You can't edit this role")
+                return {code: 409, data: "You can't edit this role"}
             } else if (editrole.status == 404) {
-                return logger.logError("Error 404: Role not found")
+                logger.logError("Error 404: Role not found")
+                return {code: 404, data: "Role not found"}
             } else if (editrole.status == 401) {
-                throw new Error("Error 401: Invalid API Key")
+               return {code: 401, data: "Invalid API key"}
             }
         }
 
@@ -304,9 +321,9 @@ function Cloud({cloudUrl, apiKey}) {
                 }
             })
             if (dash.status == 200) {
-                return dash.data
+                return {code: 200, data: dash.data}
             } else if (dash.status == 401) {
-                throw new Error("Error 401: Invalid API Key") 
+               return {code: 401, data: "Invalid API key"} 
             }
         }
         // CHECK FOR UPDATES
