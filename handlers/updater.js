@@ -2,7 +2,7 @@
 async function checkForUpdate() {
 const axios = require("axios")
 const colors = require("colors")
-const Updater = await axios.get('https://registry.npmjs.org/randomimgapi')
+const Updater = await axios.get('https://registry.npmjs.org/daneecloud-api')
 const stableVersion = Updater.data['dist-tags'].latest
     const version = require('../package.json').version
     if (stableVersion !== version && !version.includes('dev')) {
