@@ -94,5 +94,30 @@ const deleterole = await cloud.deleteRole(rolename)
 ```js
 const info = await cloud.getDashInfo()
 ```
+### Folders
+#### Get folders
+```js
+const folders = await cloud.getFolders(username)
+```
+#### Get files from folder
+```js
+const files = await cloud.getFilesFromFolder(username, folder)
+```
+#### Create a folder
+```js
+const createFolder = await cloud.createFolder(username, folder)
+```
+#### Delete a folder
+```js
+const deleteFolder = await cloud.deleteFolder(username, folder)
+```
+#### Rename a file in folder
+```js
+const renameFile = await cloud.renameFileFolder(username, folder, file, newname)
+```
+#### Delete a file in folder
+```js
+const deleteFile = await cloud.deleteFileFolder(username, folder, file)
+```
 
 # Made with JS & 💖 by DaneeSkripter
