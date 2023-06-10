@@ -330,7 +330,7 @@ function Cloud({cloudUrl, apiKey}) {
         // FOLDERS
 
         async function getFolders(username) {
-            const folders = await axios.get(cloudUrl + `/api/folders/`, {
+            const folders = await axios.get(cloudUrl + `/api/folders?username=${username}`, {
                 headers: { "API-Key" : apiKey},
                 validateStatus: function (status) {
                     return status < 500; // Resolve only if the status code is less than 500
@@ -347,7 +347,7 @@ function Cloud({cloudUrl, apiKey}) {
         }
 
         async function getFilesFromFolder(username, folder) {
-            const folders = await axios.get(cloudUrl + `/api/folders/files/`, {
+            const folders = await axios.get(cloudUrl + `/api/folders/files?username=${username}&folder=${folder}`, {
                 headers: { "API-Key" : apiKey},
                 validateStatus: function (status) {
                     return status < 500; // Resolve only if the status code is less than 500
