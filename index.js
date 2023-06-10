@@ -407,6 +407,51 @@ function Cloud({cloudUrl, apiKey}) {
                 return {code: 404, data: deleteFolder.data}
             }
         }
+
+        async function renameFileFolder(username, folder, file, newname) {
+            const renameFile = await axios.post(cloudUrl + `/api/folders/files/rename`, {}, {
+                params: {
+                    username: username,
+                    folder: folder,
+                    file: file,
+                    newname: newname
+                },
+                headers: { "API-Key" : apiKey},
+                validateStatus: function (status) {
+                    return status < 500; // Resolve only if the status code is less than 500
+                }
+            })
+            if (renameFile.status == 201) {
+                return {code: 201, data: "File renamed"}
+            } else if (renameFile.status == 401) {
+               return {code: 401, data: "Invalid API key"} 
+            } else if (renameFile.status == 404) {
+                logger.logError(renameFile.data)
+                return {code: 404, data: renameFile.data}
+            }
+        }
+
+        async function deleteFileFolder(username, folder, file) {
+            const deleteFile = await axios.post(cloudUrl + `/api/folders/files/delete`, {}, {
+                params: {
+                    username: username,
+                    folder: folder,
+                    file: file
+                },
+                headers: { "API-Key" : apiKey},
+                validateStatus: function (status) {
+                    return status < 500; // Resolve only if the status code is less than 500
+                }
+            })
+            if (deleteFile.status == 200) {
+                return {code: 200, data: "File deleted"}
+            } else if (deleteFile.status == 401) {
+               return {code: 401, data: "Invalid API key"} 
+            } else if (deleteFile.status == 404) {
+                logger.logError(deleteFile.data)
+                return {code: 404, data: deleteFile.data}
+            }
+        }
         // CHECK FOR UPDATES
 
         checkForUpdate()
@@ -433,7 +478,9 @@ function Cloud({cloudUrl, apiKey}) {
             getFolders,
             getFilesFromFolder,
             createFolder,
-            deleteFolder
+            deleteFolder,
+            renameFileFolder,
+            deleteFileFolder
            }
 }
 
