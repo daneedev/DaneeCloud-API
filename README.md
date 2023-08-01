@@ -12,7 +12,7 @@ npm install daneecloud-api@dev
 ```js
 const { Cloud } = require("daneecloud-api")
 
-const cloud = Cloud({
+const cloud = new Cloud({
     cloudUrl: "", // URL address of your cloud e.c. https://cloud.daneeskripter.dev
     apiKey: "" // API Key of your cloud. You can generate it at /addapikey
 })
