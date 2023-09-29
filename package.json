@@ -1,6 +1,6 @@
 {
   "name": "daneecloud-api",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Package used to access the DaneeCloud API",
   "main": "index.js",
   "scripts": {
@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/DaneeSkripter/DaneeCloud-API#readme",
   "dependencies": {
-    "axios": "^1.4.0",
+    "axios": "^1.5.1",
     "colors": "^1.4.0"
   }
 }
