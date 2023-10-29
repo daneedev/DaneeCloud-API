@@ -1,6 +1,6 @@
 {
   "name": "daneecloud-api",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Package used to access the DaneeCloud API",
   "main": "index.js",
   "scripts": {
