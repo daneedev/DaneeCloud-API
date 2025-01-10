@@ -1,4 +1,7 @@
 # DaneeCloud API
+# ⚠️ Project archived
+- The project DaneeCloud was completely archived and marked as abandoned, because of that this addon is archived too
+- Article: https://docs.danee.dev/blog/daneecloud-archived
 ## About
 - This package can easily handle DaneeCloud API with lot of functions
 ## Installation
